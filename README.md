@@ -1,1 +1,1 @@
-# hows-the-product
+# How's the product?

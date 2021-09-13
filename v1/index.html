@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>How's the product?</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <div class="container-fluid px-1 py-5 mx-auto">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5">
+          <div class="card">
+            <div class="row d-flex mb-4">
+              <div class="col-md-12">
+                <h1>This is the product</h1>
+              </div>
+            </div>
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <div class="row justify-content-between d-flex wait-until-load">
+              <div class="col-md-6 d-flex flex-column">
+                <div class="d-inline-flex rating-box align-items-center">
+                  <h1 class="mr-4" id="avg-rating"></h1>
+                  <fieldset class="rate" id="display">
+                    <input
+                      type="radio"
+                      id="rating10"
+                      name="rating"
+                      value="10"
+                    /><label for="rating10" title="5 stars"></label>
+                    <input
+                      type="radio"
+                      id="rating9"
+                      name="rating"
+                      value="9"
+                    /><label
+                      class="half"
+                      for="rating9"
+                      title="4 1/2 stars"
+                    ></label>
+                    <input
+                      type="radio"
+                      id="rating8"
+                      name="rating"
+                      value="8"
+                    /><label for="rating8" title="4 stars"></label>
+                    <input
+                      type="radio"
+                      id="rating7"
+                      name="rating"
+                      value="7"
+                    /><label
+                      class="half"
+                      for="rating7"
+                      title="3 1/2 stars"
+                    ></label>
+                    <input
+                      type="radio"
+                      id="rating6"
+                      name="rating"
+                      value="6"
+                    /><label for="rating6" title="3 stars"></label>
+                    <input
+                      type="radio"
+                      id="rating5"
+                      name="rating"
+                      value="5"
+                    /><label
+                      class="half"
+                      for="rating5"
+                      title="2 1/2 stars"
+                    ></label>
+                    <input
+                      type="radio"
+                      id="rating4"
+                      name="rating"
+                      value="4"
+                    /><label for="rating4" title="2 stars"></label>
+                    <input
+                      type="radio"
+                      id="rating3"
+                      name="rating"
+                      value="3"
+                    /><label
+                      class="half"
+                      for="rating3"
+                      title="1 1/2 stars"
+                    ></label>
+                    <input
+                      type="radio"
+                      id="rating2"
+                      name="rating"
+                      value="2"
+                    /><label for="rating2" title="1 star"></label>
+                    <input
+                      type="radio"
+                      id="rating1"
+                      name="rating"
+                      value="1"
+                    /><label
+                      class="half"
+                      for="rating1"
+                      title="1/2 star"
+                    ></label>
+                  </fieldset>
+                </div>
+              </div>
+              <div
+                class="
+                  col-md-3
+                  d-flex
+                  flex-column
+                  align-items-center
+                  justify-content-center
+                "
+              >
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  data-toggle="modal"
+                  data-target="#ratingModal"
+                >
+                  Add review
+                </button>
+              </div>
+            </div>
+            <hr />
+            <div class="row d-flex wait-until-load">
+              <div class="col-md-12">
+                <h4 class="text-left mb-4">Reviews</h4>
+                <div class="reviews"><!-- Reviews will be added here --></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div
+      class="modal fade"
+      id="ratingModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="ratingModalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ratingModalTitle">
+              What's your rating?
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4>Rating - <span id="rating">0</span> out of 5</h4>
+            <!-- EDITABLE STARS -->
+            <fieldset class="rate" id="review">
+              <input
+                type="radio"
+                id="rating10-review"
+                name="rating-review"
+                value="10"
+              /><label for="rating10-review" title="5 stars"></label>
+              <input
+                type="radio"
+                id="rating9-review"
+                name="rating-review"
+                value="9"
+              /><label
+                class="half"
+                for="rating9-review"
+                title="4 1/2 stars"
+              ></label>
+              <input
+                type="radio"
+                id="rating8-review"
+                name="rating-review"
+                value="8"
+              /><label for="rating8-review" title="4 stars"></label>
+              <input
+                type="radio"
+                id="rating7-review"
+                name="rating-review"
+                value="7"
+              /><label
+                class="half"
+                for="rating7-review"
+                title="3 1/2 stars"
+              ></label>
+              <input
+                type="radio"
+                id="rating6-review"
+                name="rating-review"
+                value="6"
+              /><label for="rating6-review" title="3 stars"></label>
+              <input
+                type="radio"
+                id="rating5-review"
+                name="rating-review"
+                value="5"
+              /><label
+                class="half"
+                for="rating5-review"
+                title="2 1/2 stars"
+              ></label>
+              <input
+                type="radio"
+                id="rating4-review"
+                name="rating-review"
+                value="4"
+              /><label for="rating4-review" title="2 stars"></label>
+              <input
+                type="radio"
+                id="rating3-review"
+                name="rating-review"
+                value="3"
+              /><label
+                class="half"
+                for="rating3-review"
+                title="1 1/2 stars"
+              ></label>
+              <input
+                type="radio"
+                id="rating2-review"
+                name="rating-review"
+                value="2"
+              /><label for="rating2-review" title="1 star"></label>
+
+              <input
+                type="radio"
+                id="rating1-review"
+                name="rating-review"
+                value="1"
+              /><label
+                class="half"
+                for="rating1-review"
+                title="1/2 star"
+              ></label>
+            </fieldset>
+            <!-- EDITABLE STARS -->
+            <h4>Review</h4>
+            <div class="input-group my-3">
+              <textarea
+                type="text"
+                class="form-control"
+                placeholder="Write your review.."
+                aria-label="Review"
+                id="review-text"
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="submit-review"
+              disabled
+            >
+              Submit Review
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+
+    <!-- ALERT -->
+    <div
+      class="toast"
+      style="position: absolute; top: 0; right: 0; margin: 20px"
+      id="toast"
+    >
+      <div class="toast-header">
+        <strong class="mr-auto">Success</strong>
+        <button
+          type="button"
+          class="ml-2 mb-1 close"
+          data-dismiss="toast"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">Review successfully submitted.</div>
+    </div>
+
+    <!-- ALERT -->
+
+    <script src="./constants.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

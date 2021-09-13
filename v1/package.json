@@ -1,0 +1,10 @@
+{
+  "name": "v1",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx light-server -s ."
+  },
+  "author": "Aditya",
+  "license": "MIT"
+}
